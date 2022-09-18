@@ -1,0 +1,70 @@
+.chessboard {
+  user-select: none;
+  position: absolute;
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+
+.squares,
+.pieses,
+.empties {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+
+.pieses .piese,
+.squares .square,
+.empties div {
+  position: absolute;
+  width: calc(100% / 8);
+  aspect-ratio: 1/1;
+}
+
+
+.pieses .piese {
+  background-size: cover;
+}
+
+
+.squares .square {
+  border-radius: 8px;
+}
+
+
+
+
+.files, .ranks {
+  position: absolute;
+  display: flex;
+}
+
+.files {
+  bottom: 0;
+  width: 100%;
+}
+
+.ranks {
+  right: 0px;
+  justify-content: center;
+  height: 100%;
+  flex-flow: column;
+  align-items: center;
+}
+
+.file, .rank {
+  text-shadow: 0.2px 0.2px 1px black;
+}
+
+.rank {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.file {
+  text-align: center;
+  flex: 1;
+}
