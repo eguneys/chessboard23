@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   babel-preset-solid: ^1.5.5
+  lchessanalysis: link:../lchessanalysis
   solid-js: ^1.5.5
   solid-play: link:../solid-play
   typescript: ^4.6.4
@@ -14,6 +15,7 @@ dependencies:
 
 devDependencies:
   babel-preset-solid: 1.5.5
+  lchessanalysis: link:../lchessanalysis
   typescript: 4.8.3
   vite: 3.1.2
   vite-plugin-solid: 2.3.3_solid-js@1.5.5+vite@3.1.2
