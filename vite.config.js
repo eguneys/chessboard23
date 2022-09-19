@@ -11,9 +11,9 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'Chessboard23',
       fileName: 'chessboard23'
+    },
+    rollupOptions: {
+      external: ['solid-js', 'solid-play']
     }
   },
-  rollupOptions: {
-    external: ['solid-js']
-  }
 })
