@@ -69,9 +69,9 @@ export class _Chessboard23 {
     this.m_pieses = createMemo(mapArray(() => {
       let orientation = m_orientation()
       return m_pieses()
-      .sort((a, b) => piese_d(b) - piese_d(a))
-      .map(_ => [orientation, _])
-    }, ([orientation, _]) => {
+      .map(_ => [orientation, _].join('__O__'))
+    }, (orientation_) => {
+      let [orientation, _] = orientation_.split('__O__')
       let [piece,_pos] = _.split('@')
 
       let _desired_pos = vec2_orientation(poss_vec2.get(_pos), orientation)

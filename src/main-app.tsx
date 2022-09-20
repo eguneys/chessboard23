@@ -13,6 +13,9 @@ const App = () => {
   let f1 = MobileSituation.from_fen('1k6/6r1/2Qp3p/3Bp3/2N1P1p1/P7/1PP3PP/5r1K w -').board.pieses.join(' ')
   let f2 = MobileSituation.from_fen('1k3r2/6r1/2Qp3p/3Bp3/2N1P1p1/P7/1PP3PP/5R1K b -').board.pieses.join(' ')
 
+ f1 = MobileSituation.from_fen('2kr4/p1p2pp1/1P4p1/1P2P3/3r1PP1/PQ2Pn1P/2KRR3/5q2 w -').board.pieses.join(' ')
+ f2 = MobileSituation.from_fen('2kr4/p1pr1pp1/1P4p1/1P2P3/3B1PP1/PQ2Pn1P/2KRR3/5q2 b -').board.pieses.join(' ')
+
 
   setTimeout(() => {
       owrite(_fen, 'w ' + f1)
