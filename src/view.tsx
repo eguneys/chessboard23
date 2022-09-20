@@ -18,11 +18,6 @@ export default function(props) {
            <div class={square.klass} style={square.style}/>
            }</For>
        </div>
-       <div class='pieses'>
-         <For each={ctrl.pieses}>{ (piese, i) =>
-           <div class={piese.klass} style={piese.style}/>
-           }</For>
-       </div>
        <div class='files'>
          <Index each={'abcdefgh'.split('')}>{ (file, i) =>
            <div class='file'>{file()}</div>
@@ -32,6 +27,11 @@ export default function(props) {
          <Index each={ctrl.ranks}>{ (rank, i) =>
            <div class='rank'>{rank()}</div>
          }</Index>
+       </div>
+       <div class='pieses'>
+         <For each={ctrl.pieses}>{ (piese, i) =>
+           <div class={piese.klass} style={piese.style}/>
+           }</For>
        </div>
     </div>
       </>)

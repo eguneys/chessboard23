@@ -82,6 +82,10 @@ export class _Chessboard23 {
 
     this.m_squares = createMemo(mapArray(m_squares, _ => make_square(this, _)))
     this.m_ranks = createMemo(() => m_orientation() === 'w' ? ranks : ranks_reversed)
+
+    createEffect(on(this.m_pieses, () => {
+      this._sticky_pos.reset_fix_all()
+    }))
   }
 }
 
