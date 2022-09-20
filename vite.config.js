@@ -4,7 +4,7 @@ import solidPlugin from 'vite-plugin-solid'
 
 export default defineConfig({
   plugins: [
-    solidPlugin(),
+    solidPlugin({ hot: false }),
   ],
   build: {
     sourcemap: 'inline',

@@ -10,6 +10,10 @@ const transform_style = (v: Vec2) => {
   }
 }
 
+const piese_d = piese => {
+  let [,_pos] = piese.split('@')
+  return poss.indexOf(_pos)
+}
 
 export class _Chessboard23 {
 
@@ -64,7 +68,9 @@ export class _Chessboard23 {
 
     this.m_pieses = createMemo(mapArray(() => {
       let orientation = m_orientation()
-      return m_pieses().map(_ => [orientation, _])
+      return m_pieses()
+      .sort((a, b) => piese_d(b) - piese_d(a))
+      .map(_ => [orientation, _])
     }, ([orientation, _]) => {
       let [piece,_pos] = _.split('@')
 
