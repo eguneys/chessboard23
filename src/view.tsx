@@ -9,6 +9,7 @@ export default function(props) {
   let ctrl = new _Chessboard23()
 
   createEffect(() => {
+    ctrl.drag = props.drag
     ctrl.fen = props.fen
     })
 
@@ -32,7 +33,11 @@ export default function(props) {
        <div class='pieses'>
          <For each={ctrl.pieses}>{ (piese, i) =>
            <div class={piese.klass} style={piese.style}/>
-           }</For>
+          }</For>
+         
+          <Show when={ctrl._drag_piese.style}>{ style =>
+            <div class={ctrl._drag_piese.klass} style={style}/>
+          }</Show>
        </div>
     </div>
       </>)

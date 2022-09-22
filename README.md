@@ -23,9 +23,9 @@ Alternatively check out the css files in the src/style.css and src/theme.css.
       // color  w or b
       // pieses wr@b4
       // squares dark,white@@b1
-      // instant track _e4@6.5-0.5
+      // free pieses wr@6.5,-0.5
 
-      let fen = `w wr@b4 bk@a1 dark,white@@b1 black@@c3 _e4@6.5-0.5`
+      let fen = `w wr@b4 bk@a1 dark,white@@b1 black@@c3 wr@6.5,-0.5`
       return <Chessboard23 fen={fen}/>
     }
 
