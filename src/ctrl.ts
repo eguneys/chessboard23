@@ -15,6 +15,10 @@ const piese_d = piese => {
   return poss.indexOf(_pos)
 }
 
+const normal_vec2 = normal => {
+  return Vec2.make(...normal.split(','))
+}
+
 export class _Chessboard23 {
 
   set fen(fen: string) { owrite(this._fen, fen) }
@@ -72,9 +76,10 @@ export class _Chessboard23 {
       .map(_ => [orientation, _].join('__O__'))
     }, (orientation_) => {
       let [orientation, _] = orientation_.split('__O__')
-      let [piece,_pos] = _.split('@')
+      let [piece,_pos_or] = _.split('@')
 
-      let _desired_pos = vec2_orientation(poss_vec2.get(_pos), orientation)
+      let _pos = poss_vec2.get(_pos_or) || normal_vec2(_pos_or)
+      let _desired_pos = vec2_orientation(_pos, orientation)
       let _pos0 = this._sticky_pos.acquire_pos(piece, _desired_pos)
       
       let res = make_piese(this, _, _pos0, _desired_pos)
