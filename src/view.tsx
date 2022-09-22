@@ -1,6 +1,7 @@
 /* @refresh reload */
 import { createEffect } from 'solid-js'
 import { _Chessboard23 } from './ctrl'
+import { long_color } from 'solid-play'
 
 
 export default function(props) {
@@ -12,7 +13,7 @@ export default function(props) {
     })
 
   return (<>
-    <div class='chessboard'>
+    <div class={['chessboard', long_color[ctrl.orientation]].join(' ')}>
     <div class='squares'>
          <For each={ctrl.squares}>{ (square, i) =>
            <div class={square.klass} style={square.style}/>
