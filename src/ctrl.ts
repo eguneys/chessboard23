@@ -136,6 +136,8 @@ export const make_drag_piese = (board: Board) => {
                  ))
         })
       )
+    } else {
+      owrite(_tween_pos, undefined)
     }
   }))
 
