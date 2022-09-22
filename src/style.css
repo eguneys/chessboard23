@@ -5,10 +5,19 @@
   aspect-ratio: 1/1;
 }
 
+.chessboard .shapes {
+  overflow: hidden;
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.shapes,
 .squares,
 .pieses,
 .empties {
   position: absolute;
+  top: 0px;
+  left: 0px;
   width: 100%;
   height: 100%;
 }

@@ -10,6 +10,8 @@ import { make_ref, set_$ref, make_drag_ref } from 'solid-play'
 
 const App = () => {
 
+  let _shapes = createSignal('')
+
   let _drag = createSignal()
 
   let _fen = createSignal('w wr@b4')
@@ -17,6 +19,12 @@ const App = () => {
 
   let ref = make_ref()
 
+  owrite(_shapes, `red-circle@h1~ red-arrow@a4,b5~`)
+
+  setTimeout(() => {
+
+      owrite(_shapes, `green-circle@h1 red-arrow@a4,b5`)
+      }, 2000)
 
   make_drag_ref({
       on_drag(e, start) {
@@ -33,7 +41,7 @@ const App = () => {
 
   return (<>
     <div class='board-wrap' ref={set_$ref(ref)}>
-      <Chessboard23 drag={read(_drag)} fen={m_fen()}/>
+      <Chessboard23 shapes={read(_shapes)} drag={read(_drag)} fen={m_fen()}/>
     </div>
   </>)
 }

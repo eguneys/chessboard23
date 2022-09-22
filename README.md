@@ -20,12 +20,21 @@ Alternatively check out the css files in the src/style.css and src/theme.css.
 
     const App = () => {
 
+
+      // shapes
+      // note: append ~ if still drawing (mouse is down)
+      // circle white-circle@b4~
+      // arrow red-arrow@b4,c6
+
+      // drag wr@-1.0,2.532
+
+
       // color  w or b
       // pieses wr@b4
       // squares dark,white@@b1
       // free pieses wr@6.5,-0.5
 
       let fen = `w wr@b4 bk@a1 dark,white@@b1 black@@c3 wr@6.5,-0.5`
-      return <Chessboard23 fen={fen}/>
+      return <Chessboard23 shapes={shapes} drag={drag} fen={fen}/>
     }
 

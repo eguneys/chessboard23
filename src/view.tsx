@@ -8,10 +8,10 @@ export default function(props) {
 
   let ctrl = new _Chessboard23()
 
-  createEffect(() => {
-    ctrl.drag = props.drag
-    ctrl.fen = props.fen
-    })
+  createEffect(() => { ctrl.drag = props.drag })
+  createEffect(() => { ctrl.fen = props.fen })
+  createEffect(() => { ctrl.shapes = props.shapes })
+
 
   return (<>
     <div class={['chessboard', long_color[ctrl.orientation]].join(' ')}>
@@ -39,8 +39,21 @@ export default function(props) {
             <div class={ctrl._drag_piese.klass} style={style}/>
           }</Show>
        </div>
+       <svg class='shapes' viewBox='-4 -4 8 8' preserveAspectRatio='xMidYMid slice'>
+       <defs>
+         <For each={ctrl.arrows}>{arrow =>
+           <marker id={`arrowhead-${arrow.id}`} orient="auto" markerWidth="4" markerHeight="8" refX="2.05" refY="2.01"><path d="M0,0 V4 L3,2 Z" fill={arrow.stroke}></path></marker>
+         }</For>
+        </defs>
+          <g>
+            <For each={ctrl.circles}>{ circle => 
+              <circle stroke={circle.stroke} stroke-width={circle.drawing ? "0.046875" : "0.0625"} fill="none" opacity={circle.opacity} cx={circle.cx} cy={circle.cy} r="0.46875"></circle>
+            }</For>
+            <For each={ctrl.arrows}>{ arrow =>
+              <line stroke={arrow.stroke} stroke-width="0.15625" stroke-linecap="round" marker-end={`url(#arrowhead-${arrow.id})`} opacity={arrow.opacity} x1={arrow.x1} y1={arrow.y1} x2={arrow.x2} y2={arrow.y2}></line>
+            }</For> 
+          </g>
+       </svg>
     </div>
       </>)
-
-
 }

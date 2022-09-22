@@ -22,12 +22,17 @@ const normal_vec2 = normal => {
 
 export class _Chessboard23 {
 
+  set shapes(fen: string) { owrite(this._shapes, fen) }
   set drag(piese: string) { this._drag_piese.piese = piese }
   set fen(fen: string) { owrite(this._fen, fen) }
   get squares() { return this.m_squares() }
   get pieses() { return this.m_pieses() }
   get ranks() { return this.m_ranks() }
   get orientation() { return this.m_orientation() }
+
+  get circles() { return this.m_circles() }
+  get arrows() { return this.m_arrows() }
+
 
   constructor() {
 
@@ -93,12 +98,96 @@ export class _Chessboard23 {
     createEffect(on(this.m_pieses, () => {
       this._sticky_pos.reset_fix_all()
     }))
+
+
+
+    this._shapes = createSignal('')
+    let m_shapes = createMemo(() => {
+      let shapes = read(this._shapes)
+
+      let res = [[],[]]
+
+      shapes.split(' ').forEach(_ => {
+        let [shape, _pos] = _.split('@')
+
+        if (shape.match('circle')) {
+          res[0].push(_)
+        }
+
+        if (shape.match('arrow')) {
+          res[1].push(_)
+        }
+      })
+
+      return res
+    })
+
+    let m_circles = createMemo(() => m_shapes()[0])
+    this.m_circles = createMemo(mapArray(m_circles, _ => make_circle(this, _)))
+
+    let m_arrows = createMemo(() => m_shapes()[1])
+    this.m_arrows = createMemo(mapArray(m_arrows, _ => make_arrow(this, _)))
   }
 }
 
 export type Board = _Chessboard23
 
-export const make_square = (board: Board, square: string) => {
+const pos2user = v => {
+  return Vec2.make(v.x - 3.5, 3.5 - v.y)
+}
+
+
+const make_arrow = (board: Board, arrow: string) => {
+
+  let [_arrow, _drawing] = arrow.split('~')
+
+  let drawing = _drawing === ''
+
+  let [brush, _pos1_pos2] = _arrow.split('@')
+  let [_pos1, _pos2] = _pos1_pos2.split(',')
+
+  let stroke = brush.match('red') ? 'red' : 'green'
+
+
+  let [x1, y1] = pos2user(poss_vec2.get(_pos1)).vs
+  let [x2, y2] = pos2user(poss_vec2.get(_pos2)).vs
+
+  let id = stroke[0]
+
+  return {
+    id,
+    x1,
+    y1,
+    x2,
+    y2,
+    stroke,
+    drawing,
+    get opacity() { return this.drawing ? 0.9 : 1.0 }
+  }
+}
+const make_circle = (board: Board, circle: string) => {
+
+  let [_circle, _drawing] = circle.split('~')
+
+  let drawing = _drawing === ''
+
+  let [brush, pos] = _circle.split('@')
+
+  let stroke = brush.match('red') ? 'red' : 'green'
+
+  let [cx, cy] = pos2user(poss_vec2.get(pos)).vs
+
+  return {
+    cx,
+    cy,
+    stroke,
+    drawing,
+    get opacity() { return this.drawing ? 0.9 : 1.0 }
+  }
+}
+
+
+const make_square = (board: Board, square: string) => {
   let [_klass, _pos] = square.split('@@')
 
   let m_pos = createMemo(() => vec2_orientation(poss_vec2.get(_pos), board.orientation))
