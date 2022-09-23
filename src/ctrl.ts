@@ -133,7 +133,7 @@ export class _Chessboard23 {
 export type Board = _Chessboard23
 
 const pos2user = v => {
-  return Vec2.make(v.x - 3.5, 3.5 - v.y)
+  return Vec2.make(v.x - 3.5, v.y - 3.5)
 }
 
 

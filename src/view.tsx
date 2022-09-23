@@ -10,7 +10,7 @@ export default function(props) {
 
   createEffect(() => { ctrl.drag = props.drag })
   createEffect(() => { ctrl.fen = props.fen })
-  createEffect(() => { ctrl.shapes = props.shapes })
+  createEffect(() => { ctrl.shapes = props.shapes || '' })
 
 
   return (<>
