@@ -11,6 +11,31 @@ export class Shapes {
 
   static make = () => new Shapes(undefined, new Map(), new Map())
 
+  static from_fen = (fen) => {
+
+    let circles = new Map()
+    let arrows = new Map()
+
+
+    fen.split(' ').map(_ => {
+      if (_.match('circle')) {
+        let [_color, pos] = _.split('@')
+
+        circles.set(pos, [_color.split('-')[0], pos])
+      } else {
+
+        let [_color, pos_pos2] = _.split('@')
+        let [pos, pos2] = pos_pos2.split(',')
+
+        let key = pos + pos2
+        arrows.set(key, [_color.split('-')[0], pos, pos2])
+      }
+    })
+
+
+    return new Shapes(undefined, circles, arrows)
+  }
+
   get clone() {
     return new Shapes(this._drawing, this._circles, this._arrows)
   }
@@ -31,6 +56,11 @@ export class Shapes {
 
   get shapes() {
     return [this.circle_shapes, this.arrow_shapes, this.drawing_shape].join(' ')
+  }
+
+
+  get fen() {
+    return [this.circle_shapes, this.arrow_shapes].join(' ')
   }
 
   drawing_circle(color: string, pos: string) {
