@@ -16,21 +16,22 @@ export class Shapes {
     let circles = new Map()
     let arrows = new Map()
 
+    if (fen !== '') {
+      fen.split(' ').map(_ => {
+        if (_.match('circle')) {
+          let [_color, pos] = _.split('@')
 
-    fen.split(' ').map(_ => {
-      if (_.match('circle')) {
-        let [_color, pos] = _.split('@')
+          circles.set(pos, [_color.split('-')[0], pos])
+        } else {
 
-        circles.set(pos, [_color.split('-')[0], pos])
-      } else {
+          let [_color, pos_pos2] = _.split('@')
+          let [pos, pos2] = pos_pos2.split(',')
 
-        let [_color, pos_pos2] = _.split('@')
-        let [pos, pos2] = pos_pos2.split(',')
-
-        let key = pos + pos2
-        arrows.set(key, [_color.split('-')[0], pos, pos2])
-      }
-    })
+          let key = pos + pos2
+          arrows.set(key, [_color.split('-')[0], pos, pos2])
+        }
+      })
+    }
 
 
     return new Shapes(undefined, circles, arrows)

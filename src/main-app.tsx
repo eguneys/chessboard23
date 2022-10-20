@@ -1,23 +1,24 @@
 import './wrap.css'
+import { Signal } from 'solid-js'
 import { createSignal, createMemo } from 'solid-js'
 import Chessboard23 from './view'
 import { MobileSituation } from 'lchessanalysis'
 import { initial_fen } from 'solid-play'
 import { read, write, owrite } from 'solid-play'
-import { make_ref, set_$ref, make_drag_ref } from 'solid-play'
+import { Ref, set_$ref, make_drag_from_ref } from 'solid-play'
 
 
 
 const App = () => {
 
-  let _shapes = createSignal('')
+  let _shapes: Signal<string> = createSignal('')
 
-  let _drag = createSignal()
+  let _drag: Signal<string | undefined> = createSignal()
 
   let _fen = createSignal('w wr@b4')
   let m_fen = createMemo(() => read(_fen))
 
-  let ref = make_ref()
+  let ref = Ref.make
 
   owrite(_shapes, `red-circle@h1~ red-arrow@a4,b5~`)
 
@@ -26,9 +27,9 @@ const App = () => {
       owrite(_shapes, `green-circle@h1 red-arrow@a4,b5`)
       }, 2000)
 
-  make_drag_ref({
+  make_drag_from_ref({
       on_drag(e, start) {
-      let pos = ref.get_normal_at_abs_pos(e.m || e.e).scale(8)
+      let pos = ref.get_normal_at_abs_pos(e.m || e.e)!.scale(8)
       owrite(_drag, 'wr@' + pos.vs.join(','))
       }
     }, ref)
@@ -47,7 +48,7 @@ const App = () => {
 }
 
 
-const testfen = (_fen) => {
+const testfen = (_fen: Signal<string>) => {
 
   let f1 = MobileSituation.from_fen('1k6/6r1/2Qp3p/3Bp3/2N1P1p1/P7/1PP3PP/5r1K w -').board.pieses.join(' ')
   let f2 = MobileSituation.from_fen('1k3r2/6r1/2Qp3p/3Bp3/2N1P1p1/P7/1PP3PP/5R1K b -').board.pieses.join(' ')

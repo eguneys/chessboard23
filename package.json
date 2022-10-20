@@ -4,18 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "exports": "./dist/chessboard23.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite --port=3000",
-    "build": "vite build",
+    "build": "vite build && tsc --emitDeclarationOnly",
     "preview": "vite preview",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit --watch"
   },
   "devDependencies": {
     "babel-preset-solid": "^1.5.5",
     "typescript": "^4.6.4",
     "vite": "^3.1.0",
     "vite-plugin-solid": "^2.3.3",
-    "solid-play": "link:../solid-play",
     "lchessanalysis": "link:../lchessanalysis"
   },
   "dependencies": {
