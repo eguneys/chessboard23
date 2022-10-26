@@ -69,6 +69,10 @@ export class Shapes {
     return [this.circle_shapes, this.arrow_shapes].join(' ')
   }
 
+  drawing_cancel() {
+    this._drawing = undefined
+  }
+
   drawing_circle(color: string, pos: string) {
     this._drawing = [color, pos]
   }
