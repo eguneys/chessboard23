@@ -236,10 +236,15 @@ class Piese {
               readonly _pos0: Vec2,
               readonly _desired_pos: Vec2) {
               
-      let [_klass] = piese.split('@')
+      let [__klass] = piese.split('@')
+      let [_klass, _extra_klass] = __klass.split(',')
+
       let piece = _klass
       
       let klass = ['piese', color_long[_klass[0] as Color], role_long[_klass[1] as Role]].join(' ')
+      if (_extra_klass) {
+        klass += ' ' + _extra_klass
+      }
       
       let _tween_pos = createSignal(_pos0.clone)
 
