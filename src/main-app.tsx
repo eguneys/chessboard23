@@ -15,7 +15,7 @@ const App = () => {
 
   let _drag: Signal<string | undefined> = createSignal()
 
-  let _fen = createSignal('w wr@b4')
+  let _fen = createSignal('w wd@b4')
   let m_fen = createMemo(() => read(_fen))
 
   let ref = Ref.make
@@ -30,13 +30,13 @@ const App = () => {
   make_drag_from_ref({
       on_drag(e, start) {
       let pos = ref.get_normal_at_abs_pos(e.m || e.e)!.scale(8)
-      owrite(_drag, 'wr@' + pos.vs.join(','))
+      owrite(_drag, 'wd@' + pos.vs.join(','))
       }
     }, ref)
 
 
   setTimeout(() => {
-      owrite(_fen, `b wr@a4 bk@a8 dark,white@@b1 black@@c3 wq@c4 wr@6.5,-0.5`)
+      owrite(_fen, `b wd@a4 bk@a8 dark,white@@b1 black@@c3 wq@c4 wr@6.5,-0.5`)
       }, 4000)
 
 
